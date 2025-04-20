@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Data e Localização</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      overflow: hidden;
+      height: 100vh;
+      background-color: #000;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+    }
+
+    .data {
+      position: relative;
+      z-index: 2;
+      font-size: 40px;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 5px black;
+    }
+
+    .localizacao {
+      z-index: 2;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .localizacao a {
+      color: #00bfff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .localizacao a:hover {
+      text-decoration: underline;
+    }
+
+    .fotos-caindo img {
+      position: absolute;
+      width: 130px;
+      height: auto;
+      opacity: 0.35;
+      animation: cair linear infinite;
+    }
+
+    @keyframes cair {
+      0% {
+        transform: translateY(-150px) rotate(0deg);
+        opacity: 0.1;
+      }
+      50% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="data">01/05</div>
+
+  <div class="localizacao">
+    <a href="https://www.google.com/search?client=opera-gx&q=Pico+Malwee+Parque&sourceid=opera&ie=UTF-8&oe=UTF-8" target="_blank">
+      Pico Malwee Parque - Santa Catarina
+    </a>
+  </div>
+
+  <div class="fotos-caindo" id="fotosContainer"></div>
+
+  <script>
+    const imagens = ['https://i.pinimg.com/736x/2c/77/5b/2c775b80917e0b6aef991cb5d86154b9.jpg', 'https://i.pinimg.com/736x/65/c1/e9/65c1e951d8dcc3502ae61969c8de7b6d.jpg', 'https://i.pinimg.com/736x/69/35/df/6935df2cb6d301d2195bed71ea27c190.jpg'];
+
+    function criarFoto() {
+      const img = document.createElement('img');
+      img.src = imagens[Math.floor(Math.random() * imagens.length)];
+      img.style.left = Math.random() * 100 + 'vw';
+      img.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      img.style.top = '-100px';
+      document.getElementById('fotosContainer').appendChild(img);
+
+      setTimeout(() => {
+        img.remove();
+      }, 11000);
+    }
+
+    setInterval(criarFoto, 500);
+  </script>
+
+</body>
+</html>
